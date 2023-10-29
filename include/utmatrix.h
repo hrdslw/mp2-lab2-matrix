@@ -63,81 +63,117 @@ template <class T>
 TVector<T>::TVector(int s, int si)
 {
 	//Новый код
-	if (s<0 || s > MAX_VECTOR_SIZE)
+	if ( (s < 0) || (s > MAX_VECTOR_SIZE) )
 		throw s;
+	if (Size < StartIndex) throw (s);
 	Size = s;
-	pVector = new T[Size];
-
+	StartIndex = si;
+	pVector = new T[Size-StartIndex];
 } /*-------------------------------------------------------------------------*/
 
 template <class T> //конструктор копирования
 TVector<T>::TVector(const TVector<T> &v)
 {
+	pVector = new T[v.Size];
+	Size = v.Size;
+	StartIndex = v.StartIndex;
+	for (int i = 0; i < Size; i++)
+		pVector[i] = v.pVector[i];
 } /*-------------------------------------------------------------------------*/
 
 template <class T>
 TVector<T>::~TVector()
 {
+	delete[] pVector;
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // доступ
 T& TVector<T>::operator[](int pos)
 {
-	return pVector[pos];
+	return pVector[pos - StartIndex];
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // сравнение
 bool TVector<T>::operator==(const TVector &v) const
 {
+	if (v.Size != Size) return false;
+	else {
+		for (int i = 0; i < Size; i++)
+			if (pVector[i] != v.pVector[i]) return false;
+	}
 	return true;
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // сравнение
 bool TVector<T>::operator!=(const TVector &v) const
 {
-	return true;
+	if (*this == v) return false;
+	else
+		return true;
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // присваивание
 TVector<T>& TVector<T>::operator=(const TVector &v)
 {
+	delete[] pVector;
+	pVector = new T[v.Size];
+	StartIndex = v.StartIndex;
+	Size = v.Size;
+	for (int i = 0; i < Size; i++)
+		pVector[i] = v.pVector[i];
 	return *this;
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // прибавить скаляр
 TVector<T> TVector<T>::operator+(const T &val)
 {
-	return *this;
+	TVector<T> res(Size);
+	for (int i = 0; i < Size; i++) res.pVector[i] = pVector[i] + val;
+	return res;
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // вычесть скаляр
 TVector<T> TVector<T>::operator-(const T &val)
 {
-	return *this;
+	TVector<T> res(Size);
+	for (int i = 0; i < Size; i++) res.pVector[i] = pVector[i] - val;
+	return res;
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // умножить на скаляр
 TVector<T> TVector<T>::operator*(const T &val)
 {
-	return *this;
+	TVector<T> res(Size);
+	for (int i = 0; i < Size; i++) res.pVector[i] = pVector[i] * val;
+	return res;
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // сложение
 TVector<T> TVector<T>::operator+(const TVector<T> &v)
 {
-	return *this;
+	TVector<T> res(Size);
+	for (int i = 0; i < Size; i++)
+		res.pVector[i] = pVector[i] + v.pVector[i];
+	return res;
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // вычитание
 TVector<T> TVector<T>::operator-(const TVector<T> &v)
 {
-	return *this;
+	TVector<T> res(Size);
+	for (int i = 0; i < Size; i++)
+		res.pVector[i] = pVector[i] - v.pVector[i];
+	return res;
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // скалярное произведение
 T TVector<T>::operator*(const TVector<T> &v)
 {
-	return pVector[0];
+	if (v.Size != Size) throw ("Different sizes");
+	T res;
+	for (int i = 0; i < Size; i++)
+		res = res + (v.pVector[i] * pVector[i]);
+	return res;
 } /*-------------------------------------------------------------------------*/
 
 
@@ -171,8 +207,9 @@ public:
 };
 
 template <class T>
-TMatrix<T>::TMatrix(int s): TVector<TVector<T> >(s)
+TMatrix<T>::TMatrix(int s): TVector<TVector<T>>(s)
 {
+	Size = s;
 } /*-------------------------------------------------------------------------*/
 
 template <class T> // конструктор копирования

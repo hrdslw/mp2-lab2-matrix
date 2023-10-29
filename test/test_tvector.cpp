@@ -2,17 +2,17 @@
 
 #include <gtest.h>
 
-TEST(TVector, can_create_vector_with_positive_length)
+TEST(TVector, can_create_vector_with_positive_length) //ТВектор может создать вектор с положительной длиной
 {
-  ASSERT_NO_THROW(TVector<int> v(5));
+  ASSERT_NO_THROW(TVector<int> v(5)); // нет исключений
 }
 
-TEST(TVector, cant_create_too_large_vector)
+TEST(TVector, cant_create_too_large_vector) // ТВектор не может создать слишком большой вектор (больше макс. сайз)
 {
   ASSERT_ANY_THROW(TVector<int> v(MAX_VECTOR_SIZE + 1));
 }
 
-TEST(TVector, throws_when_create_vector_with_negative_length)
+TEST(TVector, throws_when_create_vector_with_negative_length) //выбрасывает исключение, когда создается вектор с отрицательной длиной
 {
   ASSERT_ANY_THROW(TVector<int> v(-5));
 }
@@ -34,7 +34,7 @@ TEST(TVector, copied_vector_is_equal_to_source_one)
   ADD_FAILURE();
 }
 
-TEST(TVector, copied_vector_has_its_own_memory)
+TEST(TVector, copied_vector_has_its_own_memory) // у скопированного вектора своя память
 {
   ADD_FAILURE();
 }
