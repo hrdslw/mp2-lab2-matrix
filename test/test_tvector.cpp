@@ -31,19 +31,24 @@ TEST(TVector, can_create_copied_vector)
 
 TEST(TVector, copied_vector_is_equal_to_source_one)
 {
-  ADD_FAILURE();
+	TVector<int> v(10);
+	TVector<int> v1(v);
+	ASSERT_NO_THROW(v == v1);
 }
 
 TEST(TVector, copied_vector_has_its_own_memory) // у скопированного вектора своя память
 {
-  ADD_FAILURE();
+	TVector<int> v(10);
+	TVector<int> v1(v);
+	
+	EXPECT_NE(&v, &v1);
 }
 
 TEST(TVector, can_get_size)
 {
   TVector<int> v(4);
-
-  EXPECT_EQ(4, v.GetSize());
+  int s = v.Getsize();
+  EXPECT_EQ(4, s);
 }
 
 TEST(TVector, can_get_start_index)
