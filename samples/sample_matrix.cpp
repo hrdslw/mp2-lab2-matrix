@@ -11,7 +11,17 @@
 
 void main()
 {
-  TMatrix<int> a(5), b(5), c(5);
+    TMatrix<int> m(5);
+    for (int i = 0; i < 5; i++) {
+        for (int j = i; j < 5; j++)
+            m[i][j] = 6;
+    }
+    cout << m << endl;
+    for (int i = 0; i < 5; i++) {
+        for (int j = i; j < 5; j++)
+            cout << m[i][j] << ' ';
+    }
+  /*TMatrix<int> a(5), b(5), c(5);
   int i, j;
 
   setlocale(LC_ALL, "Russian");
@@ -27,5 +37,7 @@ void main()
   cout << "Matrix a = " << endl << a << endl;
   cout << "Matrix b = " << endl << b << endl;
   cout << "Matrix c = a + b" << endl << c << endl;
+  */
+
 }
 //---------------------------------------------------------------------------
