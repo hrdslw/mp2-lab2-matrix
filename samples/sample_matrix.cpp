@@ -11,17 +11,32 @@
 
 void main()
 {
-    TMatrix<int> m(5);
-    for (int i = 0; i < 5; i++) {
-        for (int j = i; j < 5; j++)
-            m[i][j] = 6;
-    }
-    cout << m << endl;
-    for (int i = 0; i < 5; i++) {
-        for (int j = i; j < 5; j++)
-            cout << m[i][j] << ' ';
-    }
-  /*TMatrix<int> a(5), b(5), c(5);
+	TMatrix<int> m(5);
+	TMatrix<int> m1(5);
+	for (int i = 0; i < 5; i++) {
+		for (int j = i; j < 5; j++)
+			m[i][j] = 1;
+	}
+	for (int i = 0; i < 5; i++) {
+		for (int j = i; j < 5; j++)
+			m1[i][j] = 2;
+	}
+
+	TMatrix<int> m2(5);
+	m2 = m + m1;
+
+
+	TMatrix<int> m3(5);
+	for (int i = 0; i < 5; i++) {
+		for (int j = i; j < 5; j++)
+			m3[i][j] = 3;
+	}
+
+	//for (int i = 0; i < 5; i++) {
+		//for (int j = i; j < 5; j++)
+			//EXPECT_EQ(m3[i][j], m2[i][j]);
+	//}
+	/*TMatrix<int> a(5), b(5), c(5);
   int i, j;
 
   setlocale(LC_ALL, "Russian");

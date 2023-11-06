@@ -162,8 +162,7 @@ TEST(TMatrix, can_add_matrices_with_equal_size)
 {
 	TMatrix<int> m(5);
 	TMatrix<int> m1(5);
-	ASSERT_NO_THROW(m + m1);
-	/*for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 5; i++) {
 		for (int j = i; j < 5; j++)
 			m[i][j] = 1;
 	}
@@ -171,12 +170,21 @@ TEST(TMatrix, can_add_matrices_with_equal_size)
 		for (int j = i; j < 5; j++)
 			m1[i][j] = 2;
 	}
+
 	TMatrix<int> m2(5);
 	m2 = m + m1;
+
+
+	TMatrix<int> m3(5);
 	for (int i = 0; i < 5; i++) {
 		for (int j = i; j < 5; j++)
-			EXPECT_EQ(3, m2[i][j]);
-	}*/
+			m3[i][j] = 3;
+	}
+
+	for (int i = 0; i < 5; i++) {
+		for (int j = i; j < 5; j++)
+			EXPECT_TRUE(m3 == m2);
+	}
 }
 
 TEST(TMatrix, cant_add_matrices_with_not_equal_size)
@@ -191,8 +199,8 @@ TEST(TMatrix, can_subtract_matrices_with_equal_size)
 {
 	TMatrix<int> m(5);
 	TMatrix<int> m1(5);
-	ASSERT_NO_THROW(m - m1);
-	/*for (int i = 0; i < 5; i++) {
+	
+	for (int i = 0; i < 5; i++) {
 		for (int j = i; j < 5; j++)
 			m[i][j] = 6;
 	}
@@ -202,10 +210,18 @@ TEST(TMatrix, can_subtract_matrices_with_equal_size)
 	}
 	TMatrix<int> m2(5);
 	m2 = m - m1;
+
+	TMatrix<int> m3(5);
 	for (int i = 0; i < 5; i++) {
 		for (int j = i; j < 5; j++)
-			EXPECT_EQ(4, m2[i][j]);
-	}*/
+			m3[i][j] = 4;
+	}
+
+	for (int i = 0; i < 5; i++) {
+		for (int j = i; j < 5; j++)
+			EXPECT_TRUE(m3 == m2);
+	}
+	
 	
 }
 

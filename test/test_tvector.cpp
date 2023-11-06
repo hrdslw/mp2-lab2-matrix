@@ -200,10 +200,18 @@ TEST(TVector, can_add_vectors_with_equal_size)
 {
 	TVector<int> v(10);
 	TVector<int> v1(10);
-	//v = v + 1;
-	//v1 = v + 2;
-	ASSERT_NO_THROW(v + v1);
-	
+	v = v + 1;
+	v1 = v1 + 2;
+	TVector<int> v2(10);
+	v2 = v + v1;
+	int arr[10];
+	for (int i = 0; i < 10; i++) {
+		arr[i] = 3;
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		EXPECT_EQ(arr[i], v2[i]);
+	}
 }
 
 TEST(TVector, cant_add_vectors_with_not_equal_size)
@@ -217,9 +225,18 @@ TEST(TVector, can_subtract_vectors_with_equal_size)
 {
 	TVector<int> v(10);
 	TVector<int> v1(10);
-	//v = v + 5;
-	//v1 = v + 1;
-	ASSERT_NO_THROW(v - v1);
+	v = v + 4;
+	v1 = v1 + 2;
+	TVector<int> v2(10);
+	v2 = v - v1;
+	int arr[10];
+	for (int i = 0; i < 10; i++) {
+		arr[i] = 2;
+	}
+	for (int i = 0; i < 10; i++)
+	{
+		EXPECT_EQ(arr[i], v2[i]);
+	}
 }
 
 TEST(TVector, cant_subtract_vectors_with_not_equal_size)
@@ -231,11 +248,15 @@ TEST(TVector, cant_subtract_vectors_with_not_equal_size)
 
 TEST(TVector, can_multiply_vectors_with_equal_size)
 {
-	TVector<int> v(10);
-	TVector<int> v1(10);
-	v = v + 3;
-	v1 = v + 2;
-	ASSERT_NO_THROW(v * v1);
+	TVector<int> v(3);
+	TVector<int> v1(3);
+	v = v + 4;
+	v1 = v1 + 2;
+	
+	int a = v * v1;
+	
+	EXPECT_EQ(a, 24);
+	
 }
 
 
