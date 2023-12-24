@@ -143,7 +143,7 @@ TEST(TMatrix, compare_equal_matrices_return_true)
 	TMatrix<int> m1(5);
 	ASSERT_TRUE(m == m1);
   
-}
+}////
 
 TEST(TMatrix, compare_matrix_with_itself_return_true)
 {
@@ -181,10 +181,9 @@ TEST(TMatrix, can_add_matrices_with_equal_size)
 			m3[i][j] = 3;
 	}
 
-	for (int i = 0; i < 5; i++) {
-		for (int j = i; j < 5; j++)
-			EXPECT_TRUE(m3 == m2);
-	}
+	
+	EXPECT_TRUE(m3 == m2);
+	
 }
 
 TEST(TMatrix, cant_add_matrices_with_not_equal_size)
@@ -217,11 +216,7 @@ TEST(TMatrix, can_subtract_matrices_with_equal_size)
 			m3[i][j] = 4;
 	}
 
-	for (int i = 0; i < 5; i++) {
-		for (int j = i; j < 5; j++)
-			EXPECT_TRUE(m3 == m2);
-	}
-	
+	EXPECT_TRUE(m3 == m2);
 	
 }
 
